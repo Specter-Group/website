@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specter — корпоративное и транзакционное сопровождение</title>
+<meta name="description" content="Specter — бутик корпоративного и транзакционного консультирования: M&A, частный капитал, трансграничные сделки. Казахстан · МФЦА · международные рынки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B0C0E;
+  --carbon:#141518;
+  --mist:#EAECEF;
+  --steel:#8B919C;
+  --faint:rgba(234,236,239,.38);
+  --line:rgba(234,236,239,.07);
+  --line-strong:rgba(234,236,239,.14);
+  --spectral:linear-gradient(90deg,#5E5A80 0%,#6C7F96 45%,#C6CBD4 100%);
+  --display:'Archivo',sans-serif;
+  --serif:'Instrument Serif',serif;
+  --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--mist);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:1px solid #C6CBD4;outline-offset:3px}
+::selection{background:#C6CBD4;color:#0B0C0E}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:100;background:rgba(11,12,14,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+nav::after{content:'';display:block;height:1px;background:var(--spectral);opacity:.5}
+.nav-in{max-width:1300px;margin:0 auto;padding:0 40px;height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.wordmark{font-family:var(--display);font-weight:500;font-size:19px;letter-spacing:.5em;text-transform:uppercase;color:var(--mist)}
+.wordmark .k{color:var(--steel)}
+.nav-tabs{display:flex;gap:2px}
+.nav-tabs button{font-family:var(--display);font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);padding:9px 12px;position:relative;transition:color .25s}
+.nav-tabs button:hover{color:var(--mist)}
+.nav-tabs button.on{color:var(--mist)}
+.nav-tabs button.on::after{content:'';position:absolute;left:12px;right:12px;bottom:0;height:1px;background:var(--spectral)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.lang-sw{display:flex;border:1px solid var(--line-strong)}
+.lang-sw button{font-family:var(--display);font-size:11px;font-weight:500;letter-spacing:.12em;padding:9px 13px;color:var(--steel);transition:all .25s}
+.lang-sw button.on{background:var(--mist);color:var(--ink)}
+.nav-cta{font-family:var(--display);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-strong);padding:12px 20px;transition:all .3s;white-space:nowrap}
+.nav-cta:hover{background:var(--mist);color:var(--ink);border-color:var(--mist)}
+
+.page{display:none;padding-top:80px;animation:rise .5s ease}
+.page.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.wrap{max-width:1300px;margin:0 auto;padding:0 40px}
+.sec{padding:110px 0;border-top:1px solid var(--line)}
+.eb{font-family:var(--display);font-size:11.5px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--steel);margin-bottom:30px;display:flex;align-items:center;gap:14px}
+.eb .s{font-family:var(--serif);font-style:italic;font-size:17px;background:var(--spectral);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1,h2,h3{font-family:var(--display);font-weight:200;letter-spacing:-.02em}
+.d1{font-size:clamp(40px,5.6vw,84px);line-height:1.04}
+.d1 em,.h2 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;color:var(--faint)}
+.h2{font-size:clamp(30px,3.2vw,50px);line-height:1.1}
+.lede{font-size:16.5px;color:var(--steel);max-width:580px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:70px;flex-wrap:wrap}
+
+.hero{min-height:calc(100vh - 80px);display:flex;align-items:center;position:relative;overflow:hidden}
+.ghostmark{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);font-family:var(--display);font-weight:200;font-size:min(17vw,240px);letter-spacing:.28em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(234,236,239,.06);white-space:nowrap;pointer-events:none;user-select:none}
+.hero-in{position:relative;z-index:2;padding:90px 0 110px}
+.hero .lede{margin:34px 0 50px}
+.ctas{display:flex;gap:18px;flex-wrap:wrap}
+.btn{font-family:var(--display);font-size:12.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:18px 38px;transition:all .3s;border:1px solid transparent;display:inline-block}
+.btn-solid{background:var(--mist);color:var(--ink)}
+.btn-solid:hover{background:#fff}
+.btn-line{border-color:var(--line-strong);color:var(--mist)}
+.btn-line:hover{border-color:var(--mist)}
+.hero-meta{display:flex;margin-top:88px;flex-wrap:wrap;row-gap:28px}
+.hm{padding:0 42px;border-left:1px solid var(--line)}
+.hm:first-child{padding-left:0;border-left:none}
+.hm .v{font-family:var(--display);font-weight:200;font-size:34px}
+.hm .k{font-family:var(--display);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-top:6px;max-width:180px}
+
+.band{padding:100px 0;border-top:1px solid var(--line);text-align:center}
+.band .line{font-family:var(--serif);font-style:italic;font-size:clamp(23px,2.7vw,36px);line-height:1.5;max-width:840px;margin:0 auto}
+.band .line b{font-weight:400;background:var(--spectral);-webkit-background-clip:text;background-clip:text;color:transparent}
+.band .who{margin-top:28px;font-family:var(--display);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--steel)}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.pgrid.two{grid-template-columns:repeat(2,1fr)}
+.pc{background:var(--ink);padding:44px 38px 50px;position:relative;transition:background .3s}
+.pc:hover{background:var(--carbon)}
+.pc .mark{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--faint);display:block;margin-bottom:24px}
+.pc h3{font-size:20px;font-weight:400;margin-bottom:12px}
+.pc p{font-size:14px;color:var(--steel)}
+.pc::after{content:'';position:absolute;left:38px;right:38px;bottom:0;height:1px;background:var(--spectral);opacity:0;transition:opacity .3s}
+.pc:hover::after{opacity:1}
+
+.txg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tx{background:var(--carbon);border:1px solid var(--line);padding:48px 42px;transition:border-color .3s}
+.tx:hover{border-color:var(--line-strong)}
+.tx .tag{font-family:var(--display);font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line-strong);padding:7px 13px;display:inline-block;margin-bottom:28px}
+.tx .val{font-family:var(--display);font-weight:200;font-size:clamp(38px,3vw,50px);letter-spacing:-.03em;line-height:1;margin-bottom:12px}
+.tx .val i{font-family:var(--serif);font-style:italic;font-size:.52em;color:var(--faint);margin-left:4px}
+.tx p{font-size:14px;color:var(--steel);margin-bottom:24px}
+.tx .ft{font-family:var(--display);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--line);padding-top:18px}
+.tx.wide{grid-column:span 3;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.tx.wide .val{font-size:clamp(52px,5vw,74px)}
+.confid{margin-top:22px;font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);text-align:center}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.creed{display:flex;flex-direction:column}
+.creed-i{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:56px 1fr;gap:22px}
+.creed-i:first-child{border-top:1px solid var(--line)}
+.creed-i .cs{font-family:var(--serif);font-style:italic;font-size:18px;background:var(--spectral);-webkit-background-clip:text;background-clip:text;color:transparent}
+.creed-i h3{font-size:18px;font-weight:400;margin-bottom:8px}
+.creed-i p{font-size:14px;color:var(--steel)}
+
+.firm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.fm{background:var(--carbon);border:1px solid var(--line);transition:border-color .3s}
+.fm:hover{border-color:var(--line-strong)}
+.fm-top{aspect-ratio:4/3;position:relative;background:radial-gradient(360px circle at 72% 18%,rgba(110,106,143,.16),transparent 60%),linear-gradient(155deg,#1C1E23,#101114)}
+.fm-top .g{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:200;font-size:78px;letter-spacing:.1em;color:rgba(234,236,239,.07)}
+.fm-top .r{position:absolute;left:26px;bottom:20px;font-family:var(--display);font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;background:var(--spectral);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fm-b{padding:30px 28px 36px}
+.fm-b h3{font-size:19px;font-weight:400;margin-bottom:5px}
+.fm-b .sub{font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-bottom:16px}
+.fm-b p{font-size:13.5px;color:var(--steel)}
+.fm-f{margin-top:20px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.fm-f div{font-size:12.5px;color:var(--faint);display:flex;gap:10px}
+.fm-f div::before{content:'§';font-family:var(--serif);font-style:italic;color:var(--steel);flex-shrink:0}
+
+.ins .row{display:grid;grid-template-columns:130px 1fr 190px;gap:44px;padding:36px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:background .25s}
+.ins .row:first-child{border-top:1px solid var(--line)}
+.ins .row:hover{background:rgba(234,236,239,.015)}
+.ins .dt{font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.ins h3{font-size:20px;font-weight:300;line-height:1.4}
+.ins .row:hover h3{color:#fff}
+.ins .ct{font-family:var(--display);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);text-align:right}
+
+.cgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:96px}
+.clines{margin-top:52px}
+.cl{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.cl:first-child{border-top:1px solid var(--line)}
+.cl .k{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);padding-top:2px}
+.cl a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.cform{background:var(--carbon);border:1px solid var(--line);padding:52px 48px}
+.cform h3{font-size:22px;font-weight:300;margin-bottom:32px}
+.ff{margin-bottom:24px}
+.ff label{display:block;font-family:var(--display);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-bottom:10px}
+.ff input,.ff textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-strong);color:var(--mist);font-family:var(--body);font-size:15px;padding:9px 0;outline:none;resize:none;transition:border-color .3s}
+.ff input:focus,.ff textarea:focus{border-color:#C6CBD4}
+.cnote{font-size:11.5px;color:var(--faint);margin-top:16px;line-height:1.6}
+
+footer{border-top:1px solid var(--line);padding:72px 0 44px;margin-top:30px;position:relative}
+footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--spectral);opacity:.4}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:60px}
+.fg h4{font-family:var(--display);font-size:10.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--steel);margin-bottom:22px}
+.fg a{display:block;font-size:13.5px;color:var(--faint);margin-bottom:11px;transition:color .25s}
+.fg a:hover{color:var(--mist)}
+.fdesc{font-size:13px;color:var(--steel);max-width:330px;margin-top:20px}
+.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--line);font-family:var(--display);font-size:11px;letter-spacing:.12em;color:var(--faint)}
+.fgroup{letter-spacing:.22em;text-transform:uppercase;background:var(--spectral);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.75}
+
+.ph{padding:104px 0 84px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.ph .gs{position:absolute;right:-20px;top:-60px;font-family:var(--serif);font-style:italic;font-size:320px;line-height:1;color:rgba(234,236,239,.03);pointer-events:none}
+
+@media(max-width:1120px){
+  .nav-tabs{display:none}
+  .pgrid,.pgrid.two,.txg,.firm-grid{grid-template-columns:repeat(2,1fr)}
+  .tx.wide{grid-column:span 2;grid-template-columns:1fr}
+  .split,.cgrid{grid-template-columns:1fr;gap:56px}
+}
+@media(max-width:680px){
+  .wrap{padding:0 22px}
+  .pgrid,.pgrid.two,.txg,.firm-grid{grid-template-columns:1fr}
+  .tx.wide{grid-column:span 1}
+  .ins .row{grid-template-columns:1fr;gap:8px}
+  .ins .ct{text-align:left}
+  .fg{grid-template-columns:1fr 1fr}
+  .hm{padding:0 24px}
+  .hm:first-child{padding-left:0}
+  .sec{padding:76px 0}
+  .wordmark{letter-spacing:.28em;font-size:15px}
+  .nav-cta{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="wordmark" onclick="go('home');return false">Specter<span class="k">.</span></a>
+    <div class="nav-tabs">
+      <button data-p="home" class="on" onclick="go('home')" data-i18n="nav1">Главная</button>
+      <button data-p="expertise" onclick="go('expertise')" data-i18n="nav2">Экспертиза</button>
+      <button data-p="transactions" onclick="go('transactions')" data-i18n="nav3">Сделки</button>
+      <button data-p="firm" onclick="go('firm')" data-i18n="nav4">Фирма</button>
+      <button data-p="insights" onclick="go('insights')" data-i18n="nav5">Публикации</button>
+      <button data-p="contact" onclick="go('contact')" data-i18n="nav6">Контакты</button>
+    </div>
+    <div class="nav-right">
+      <div class="lang-sw">
+        <button id="lb-ru" class="on" onclick="setLang('ru')">RU</button>
+        <button id="lb-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="nav-cta" onclick="go('contact')" data-i18n="cta">Записаться на консультацию</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ ГЛАВНАЯ ============ -->
+<div class="page on" id="p-home">
+
+  <section class="hero">
+    <div class="ghostmark">Specter</div>
+    <div class="wrap hero-in">
+      <div class="eb"><span class="s">§</span><span data-i18n="h_eb">Корпоративное и транзакционное сопровождение — Казахстан · МФЦА · трансграничные сделки</span></div>
+      <h1 class="d1" data-i18n="h_t">Сложные сделки.<br><em>Простые решения.</em></h1>
+      <p class="lede" data-i18n="h_l">Specter консультирует инвесторов, финансовые институты и корпоративные группы по M&amp;A, частному капиталу и трансграничным сделкам в Казахстане, МФЦА и за их пределами.</p>
+      <div class="ctas">
+        <button class="btn btn-solid" onclick="go('contact')" data-i18n="cta">Записаться на консультацию</button>
+        <button class="btn btn-line" onclick="go('expertise')" data-i18n="h_b2">Наша экспертиза</button>
+      </div>
+      <div class="hero-meta">
+        <div class="hm"><div class="v">$4B+</div><div class="k" data-i18n="m1">Совокупная стоимость сделок</div></div>
+        <div class="hm"><div class="v">120+</div><div class="k" data-i18n="m2">Закрытых проектов</div></div>
+        <div class="hm"><div class="v">11</div><div class="k" data-i18n="m3">Юрисдикций</div></div>
+        <div class="hm"><div class="v">100%</div><div class="k" data-i18n="m4">Партнёрское ведение проектов</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="line" data-i18n="q_t">Строгость международной фирмы. <b>Фокус бутика.</b></p>
+      <p class="who" data-i18n="q_a">Принцип фирмы</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eb"><span class="s">§</span><span data-i18n="p_eb">Практика</span></div>
+          <h2 class="h2" data-i18n="p_t">Полный корпоративный <em>спектр</em></h2>
+        </div>
+        <p class="lede" style="max-width:400px" data-i18n="p_l">Одна интегрированная команда по всем дисциплинам, которых касается сложная сделка. Без передач между отделами — потому что отделов нет.</p>
+      </div>
+      <div class="pgrid">
+        <div class="pc"><span class="mark">§ 1</span><h3 data-i18n="p1t">Слияния и поглощения</h3><p data-i18n="p1d">Мандаты на стороне покупателя и продавца, аукционы, выделения активов и совместные предприятия по казахстанскому, английскому праву и праву МФЦА.</p></div>
+        <div class="pc"><span class="mark">§ 2</span><h3 data-i18n="p2t">Private Equity</h3><p data-i18n="p2d">Структуры приобретения, акционерная документация, мотивационные программы менеджмента и структурированные выходы для фондов.</p></div>
+        <div class="pc"><span class="mark">§ 3</span><h3 data-i18n="p3t">Венчурный капитал</h3><p data-i18n="p3d">Раунды от seed до growth, архитектура cap table и трансграничные холдинговые структуры.</p></div>
+        <div class="pc"><span class="mark">§ 4</span><h3 data-i18n="p4t">Банковское право и финансирование</h3><p data-i18n="p4d">Синдицированное и сделочное финансирование, обеспечительные пакеты, межкредиторские соглашения и реструктуризации.</p></div>
+        <div class="pc"><span class="mark">§ 5</span><h3 data-i18n="p5t">Рынки капитала</h3><p data-i18n="p5d">Размещения акций и облигаций, листинги на AIX и международных площадках, комплаенс эмитента.</p></div>
+        <div class="pc"><span class="mark">§ 6</span><h3 data-i18n="p6t">МФЦА и регуляторика</h3><p data-i18n="p6d">Авторизация AFSA, регулируемые структуры, финтех-режимы и стык с действующим правом Казахстана.</p></div>
+        <div class="pc"><span class="mark">§ 7</span><h3 data-i18n="p7t">Трансграничные сделки</h3><p data-i18n="p7d">Мультиюрисдикционная архитектура сделок: Центральная Азия, Залив, Европа, Сингапур.</p></div>
+        <div class="pc"><span class="mark">§ 8</span><h3 data-i18n="p8t">Корпоративное управление</h3><p data-i18n="p8d">Акционерная архитектура, сопровождение советов директоров, реструктуризации групп и антимонопольный контроль.</p></div>
+        <div class="pc"><span class="mark">§ 9</span><h3 data-i18n="p9t">Споры и арбитраж</h3><p data-i18n="p9d">Коммерческий и инвестиционный арбитраж со стратегией, выстроенной от исполнимости решения.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eb"><span class="s">§</span><span data-i18n="tx_eb">Избранные проекты</span></div>
+          <h2 class="h2" data-i18n="tx_t">Избранные <em>сделки</em></h2>
+        </div>
+      </div>
+      <div class="txg">
+        <div class="tx wide">
+          <div>
+            <span class="tag" data-i18n="t1g">M&amp;A · Энергетика</span>
+            <div class="val">$1.4<i data-i18n="bn">млрд</i></div>
+            <p data-i18n="t1d">Сопровождение покупателя при приобретении контрольного пакета интегрированной энергетической группы: четыре регуляторных режима, параллельная архитектура SPA/SHA по английскому праву, антимонопольное согласование.</p>
+          </div>
+          <div class="ft" style="border:none;padding:0" data-i18n="t1f">Трансграничная · KZ / UK / NL · Закрыта</div>
+        </div>
+        <div class="tx"><span class="tag" data-i18n="t2g">Private Equity</span><div class="val">$380<i data-i18n="mn">млн</i></div><p data-i18n="t2d">Сопровождение фонда в сделке LBO с ролловером менеджмента и вендорным финансированием.</p><div class="ft" data-i18n="t2f">LBO · Потребительский сектор</div></div>
+        <div class="tx"><span class="tag" data-i18n="t3g">Финансирование</span><div class="val">$520<i data-i18n="mn">млн</i></div><p data-i18n="t3d">Сопровождение синдиката кредиторов при обеспеченном финансировании инфраструктурной платформы.</p><div class="ft" data-i18n="t3f">Синдикат · 6 кредиторов</div></div>
+        <div class="tx"><span class="tag" data-i18n="t4g">Венчурный капитал</span><div class="val">$60<i data-i18n="mn">млн</i></div><p data-i18n="t4d">Раунд Series B в региональный финтех через холдинговую структуру МФЦА.</p><div class="ft" data-i18n="t4f">Сторона инвестора · МФЦА</div></div>
+        <div class="tx"><span class="tag" data-i18n="t5g">Трансграничная</span><div class="val">3<i data-i18n="jur">юрисд.</i></div><p data-i18n="t5d">Реорганизация промышленной группы в Казахстане, ОАЭ и Сингапуре с выравниванием потоков под налоговые соглашения.</p><div class="ft" data-i18n="t5f">Реструктуризация группы</div></div>
+        <div class="tx"><span class="tag" data-i18n="t6g">Рынки капитала</span><div class="val">AIX<i>ipo</i></div><p data-i18n="t6d">Сопровождение эмитента при первичном размещении и подготовке к двойному листингу.</p><div class="ft" data-i18n="t6f">Акции · Листинг</div></div>
+      </div>
+      <p class="confid" data-i18n="tx_c">§ — Большинство наших мандатов остаются конфиденциальными по требованию клиентов.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div>
+        <div class="eb"><span class="s">§</span><span data-i18n="w_eb">Почему Specter</span></div>
+        <h2 class="h2" style="margin-bottom:44px" data-i18n="w_t">Принципы <em>работы</em></h2>
+        <div class="creed">
+          <div class="creed-i"><span class="cs">§ a</span><div><h3 data-i18n="w1t">Партнёр ведёт сделку от начала до закрытия</h3><p data-i18n="w1d">Каждый проект ведёт старший юрист — от мандата до closing. Без пирамид и передач вниз.</p></div></div>
+          <div class="creed-i"><span class="cs">§ b</span><div><h3 data-i18n="w2t">Архитектура сделки, а не меморандумы</h3><p data-i18n="w2d">Мы проектируем сделку — структуру, последовательность, точки рычага, — а не комментируем чужой план.</p></div></div>
+          <div class="creed-i"><span class="cs">§ c</span><div><h3 data-i18n="w3t">Две правовые системы, одна команда</h3><p data-i18n="w3d">Свободное владение казахстанским гражданским правом и английской сделочной технологией в рамках МФЦА.</p></div></div>
+          <div class="creed-i"><span class="cs">§ d</span><div><h3 data-i18n="w4t">Конфиденциальность по умолчанию</h3><p data-i18n="w4d">Конфиденциальность — базовое условие работы, а не опция. Информация о мандатах раскрывается только с согласия клиента.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="eb"><span class="s">§</span><span data-i18n="i_eb">Индустрии</span></div>
+        <h2 class="h2" style="margin-bottom:44px" data-i18n="i_t">Где мы <em>работаем</em></h2>
+        <div class="creed">
+          <div class="creed-i"><span class="cs">—</span><div><h3 data-i18n="i1t">Энергетика и природные ресурсы</h3><p data-i18n="i1d">От добычи до генерации: приобретения, СП и регуляторные согласования.</p></div></div>
+          <div class="creed-i"><span class="cs">—</span><div><h3 data-i18n="i2t">Финансовые институты и финтех</h3><p data-i18n="i2d">Банки, фонды, платёжные платформы и регулируемые компании МФЦА.</p></div></div>
+          <div class="creed-i"><span class="cs">—</span><div><h3 data-i18n="i3t">Промышленность, инфраструктура и транспорт</h3><p data-i18n="i3d">Платформы, концессии и трансграничные логистические группы.</p></div></div>
+          <div class="creed-i"><span class="cs">—</span><div><h3 data-i18n="i4t">Частный капитал и семейные офисы</h3><p data-i18n="i4d">Холдинговая архитектура, преемственность и структуры соинвестирования.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="text-align:center">
+    <div class="wrap">
+      <div class="eb" style="justify-content:center"><span class="s">§</span><span data-i18n="e_eb">Начать работу</span></div>
+      <h2 class="h2" style="margin-bottom:18px" data-i18n="e_t">Обсудим вашу <em>следующую сделку</em></h2>
+      <p class="lede" style="margin:0 auto 40px" data-i18n="e_l">Первичная консультация конфиденциальна и ни к чему не обязывает.</p>
+      <button class="btn btn-solid" onclick="go('contact')" data-i18n="cta">Записаться на консультацию</button>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ЭКСПЕРТИЗА ============ -->
+<div class="page" id="p-expertise">
+  <section class="ph"><span class="gs">§</span>
+    <div class="wrap">
+      <div class="eb"><span class="s">§</span><span data-i18n="nav2">Экспертиза</span></div>
+      <h1 class="d1" style="font-size:clamp(36px,4.4vw,64px)" data-i18n="x_t">Девять дисциплин.<br><em>Одна сделочная команда.</em></h1>
+      <p class="lede" style="margin-top:30px" data-i18n="x_l">Мы выставляем единую команду, откалиброванную под сделку, — а не отделы, конкурирующие за мандат.</p>
+    </div>
+  </section>
+  <section class="sec" style="border:none">
+    <div class="wrap pgrid two">
+      <div class="pc"><span class="mark">§ M&amp;A</span><h3 data-i18n="p1t">Слияния и поглощения</h3><p data-i18n="x1d">Полный цикл: term sheet, due diligence и red-flag отчёты, переговоры по SPA/SHA по казахстанскому и английскому праву, управление отлагательными условиями, disclosure, механика закрытия и постинтеграция. Аукционы с обеих сторон стола.</p></div>
+      <div class="pc"><span class="mark">§ PE</span><h3 data-i18n="p2t">Private Equity</h3><p data-i18n="x2d">Сопровождение фондов и менеджмента на всём цикле: структуры приобретения, акционерная документация, рэтчеты и мотивационные планы, управление портфелем и подготовка к выходу.</p></div>
+      <div class="pc"><span class="mark">§ VC</span><h3 data-i18n="p3t">Венчурный капитал</h3><p data-i18n="x3d">Раунды от seed до поздних стадий, права инвесторов, ESOP и холдинговые структуры через МФЦА, ADGM и Сингапур.</p></div>
+      <div class="pc"><span class="mark">§ FIN</span><h3 data-i18n="p4t">Банковское право и финансирование</h3><p data-i18n="x4d">Двусторонние и синдицированные кредиты, залоги долей и активов, межкредиторские соглашения и работа с проблемной задолженностью.</p></div>
+      <div class="pc"><span class="mark">§ CM</span><h3 data-i18n="p5t">Рынки капитала</h3><p data-i18n="x5d">IPO и вторичные размещения, облигационные программы, листинги на AIX и международных биржах, ответственность по проспекту и текущие обязательства.</p></div>
+      <div class="pc"><span class="mark">§ AIFC</span><h3 data-i18n="p6t">МФЦА и регуляторика</h3><p data-i18n="x6d">Авторизация и надзор AFSA, структурирование фондов и регулируемых компаний, финтех-режимы и стык с действующим правом Казахстана.</p></div>
+      <div class="pc"><span class="mark">§ XB</span><h3 data-i18n="p7t">Трансграничные сделки</h3><p data-i18n="x7d">Проектирование сделок в нескольких правопорядках, выравнивание под налоговые соглашения, корректная идентификация сторон, двуязычная документация закрывающего стандарта.</p></div>
+      <div class="pc"><span class="mark">§ GOV</span><h3 data-i18n="p8t">Корпоративное управление</h3><p data-i18n="x8d">Уставная и акционерная архитектура, эффективность советов директоров, прозрачность бенефициаров, сделки с заинтересованностью и антимонопольный контроль.</p></div>
+      <div class="pc"><span class="mark">§ ARB</span><h3 data-i18n="p9t">Споры и арбитраж</h3><p data-i18n="x9d">Коммерческий и инвестиционный арбитраж в Суде МФЦА, LCIA, ICC и SIAC с параллельной стратегией исполнения.</p></div>
+      <div class="pc"><span class="mark">§ CMP</span><h3 data-i18n="x10t">Комплаенс</h3><p data-i18n="x10d">ПОД/ФТ, оценка санкционных рисков, внутренние расследования и комплаенс-заключения по сделкам.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ СДЕЛКИ ============ -->
+<div class="page" id="p-transactions">
+  <section class="ph"><span class="gs">§</span>
+    <div class="wrap">
+      <div class="eb"><span class="s">§</span><span data-i18n="tr_eb">Опыт</span></div>
+      <h1 class="d1" style="font-size:clamp(36px,4.4vw,64px)" data-i18n="tr_t">Избранные <em>сделки</em></h1>
+      <p class="lede" style="margin-top:30px" data-i18n="tr_l">Репрезентативная выборка закрытых проектов.</p>
+    </div>
+  </section>
+  <section class="sec" style="border:none">
+    <div class="wrap">
+      <div class="txg">
+        <div class="tx"><span class="tag" data-i18n="t1g">M&amp;A · Энергетика</span><div class="val">$1.4<i data-i18n="bn">млрд</i></div><p data-i18n="r1d">Приобретение контрольного пакета интегрированной энергетической группы в четырёх регуляторных режимах.</p><div class="ft" data-i18n="r1f">Сторона покупателя · Закрыта</div></div>
+        <div class="tx"><span class="tag" data-i18n="t3g">Финансирование</span><div class="val">$520<i data-i18n="mn">млн</i></div><p data-i18n="r2d">Обеспеченное синдицированное финансирование инфраструктурной платформы.</p><div class="ft" data-i18n="r2f">Сторона кредиторов</div></div>
+        <div class="tx"><span class="tag" data-i18n="r3g">M&amp;A · Горнодобыча</span><div class="val">$700<i data-i18n="mn">млн</i></div><p data-i18n="r3d">Продажа актива через аукцион с поэтапным завершением и механикой earn-out.</p><div class="ft" data-i18n="r3f">Сторона продавца · Аукцион</div></div>
+        <div class="tx"><span class="tag" data-i18n="t2g">Private Equity</span><div class="val">$380<i data-i18n="mn">млн</i></div><p data-i18n="r4d">LBO с ролловером менеджмента и вендорным финансированием.</p><div class="ft" data-i18n="r4f">Сторона фонда</div></div>
+        <div class="tx"><span class="tag" data-i18n="r5g">Реструктуризация</span><div class="val">$450<i data-i18n="mn">млн</i></div><p data-i18n="r5d">Реструктуризация долга и рекапитализация региональной группы.</p><div class="ft" data-i18n="r5f">Комитет кредиторов</div></div>
+        <div class="tx"><span class="tag" data-i18n="r6g">Государственный сектор</span><div class="val">$260<i data-i18n="mn">млн</i></div><p data-i18n="r6d">ГЧП-концессия и финансирование национального транспортного коридора.</p><div class="ft" data-i18n="r6f">Сторона концедента</div></div>
+        <div class="tx"><span class="tag" data-i18n="t4g">Венчурный капитал</span><div class="val">$60<i data-i18n="mn">млн</i></div><p data-i18n="r7d">Series B в региональный финтех через холдинг МФЦА.</p><div class="ft" data-i18n="r7f">Сторона инвестора</div></div>
+        <div class="tx"><span class="tag" data-i18n="t6g">Рынки капитала</span><div class="val">AIX<i>ipo</i></div><p data-i18n="r8d">IPO и программа подготовки к двойному листингу.</p><div class="ft" data-i18n="r8f">Сторона эмитента</div></div>
+        <div class="tx"><span class="tag" data-i18n="r9g">Арбитраж</span><div class="val">$180<i data-i18n="mn">млн</i></div><p data-i18n="r9d">Защита по коммерческому иску с полным возмещением расходов.</p><div class="ft" data-i18n="r9f">Сторона ответчика</div></div>
+      </div>
+      <p class="confid" data-i18n="tr_c">§ — Суммы и секторы указаны ориентировочно; детали раскрываются только с согласия клиента.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ФИРМА ============ -->
+<div class="page" id="p-firm">
+  <section class="ph"><span class="gs">§</span>
+    <div class="wrap">
+      <div class="eb"><span class="s">§</span><span data-i18n="f_eb">Фирма</span></div>
+      <h1 class="d1" style="font-size:clamp(36px,4.4vw,64px)" data-i18n="f_t">Старшие — <em>по замыслу</em></h1>
+      <p class="lede" style="margin-top:30px" data-i18n="f_l">Намеренно компактная команда. Каждый юрист Specter вёл сложные сделки, а не поддерживал их.</p>
+    </div>
+  </section>
+  <section class="sec" style="border:none">
+    <div class="wrap firm-grid">
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—1</span><span class="r" data-i18n="f1r">Управляющий партнёр</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f1r">Управляющий партнёр</h3><div class="sub" data-i18n="f1s">M&amp;A · Корпоративное право</div>
+          <p data-i18n="f1d">Возглавляет транзакционную практику. Координирует многопотоковые сделки от term sheet до закрытия по казахстанскому и английскому праву.</p>
+          <div class="fm-f"><div data-i18n="f1a">Трансграничные M&amp;A: KZ, МФЦА, ОАЭ, Сингапур, Нидерланды</div><div data-i18n="f1b">Аукционный опыт с обеих сторон стола</div></div>
+        </div>
+      </div>
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—2</span><span class="r" data-i18n="f2r">Старший партнёр</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f2r">Старший партнёр</h3><div class="sub" data-i18n="f2s">M&amp;A · Реструктуризации</div>
+          <p data-i18n="f2d">Сопровождает приобретения высокой сложности и реструктуризации групп, сочетая глубину гражданского права с английской сделочной технологией.</p>
+          <div class="fm-f"><div data-i18n="f2a">Мандаты в энергетике, финансах и промышленности</div><div data-i18n="f2b">Акционерная архитектура и антимонопольные согласования</div></div>
+        </div>
+      </div>
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—3</span><span class="r" data-i18n="f3r">Партнёр</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f3r">Партнёр</h3><div class="sub" data-i18n="f3s">Частный капитал</div>
+          <p data-i18n="f3d">Консультирует фонды и инвесторов роста по структурам фондов, инвестициям и выходам в регионе.</p>
+          <div class="fm-f"><div data-i18n="f3a">Сделки PE/VC от seed до buyout</div><div data-i18n="f3b">Фондовые платформы МФЦА для институциональных спонсоров</div></div>
+        </div>
+      </div>
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—4</span><span class="r" data-i18n="f3r">Партнёр</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f3r">Партнёр</h3><div class="sub" data-i18n="f4s">МФЦА · Регуляторика</div>
+          <p data-i18n="f4d">Глубокое практическое знание процедур AFSA, регулируемых структур и институциональной экосистемы МФЦА.</p>
+          <div class="fm-f"><div data-i18n="f4a">Авторизации и регулируемые структуры в масштабе</div><div data-i18n="f4b">Режимы цифровых активов и финтеха</div></div>
+        </div>
+      </div>
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—5</span><span class="r" data-i18n="f5r">Советник</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f5r">Советник</h3><div class="sub" data-i18n="f5s">Споры и арбитраж</div>
+          <p data-i18n="f5d">Представляет клиентов в коммерческих и инвестиционных спорах, выстраивая стратегию от исполнимости решения.</p>
+          <div class="fm-f"><div data-i18n="f5a">Опыт LCIA, ICC, SIAC и Суда МФЦА</div><div data-i18n="f5b">Параллельная стратегия исполнения и розыска активов</div></div>
+        </div>
+      </div>
+      <div class="fm">
+        <div class="fm-top"><span class="g">S—6</span><span class="r" data-i18n="f5r">Советник</span></div>
+        <div class="fm-b">
+          <h3 data-i18n="f5r">Советник</h3><div class="sub" data-i18n="f6s">Трансграничное структурирование</div>
+          <p data-i18n="f6d">Проектирует мультиюрисдикционные холдинговые и сервисные структуры с полным выравниванием под налоговые соглашения.</p>
+          <div class="fm-f"><div data-i18n="f6a">Структуры в 11 юрисдикциях</div><div data-i18n="f6b">Двуязычная документация закрывающего стандарта</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ПУБЛИКАЦИИ ============ -->
+<div class="page" id="p-insights">
+  <section class="ph"><span class="gs">§</span>
+    <div class="wrap">
+      <div class="eb"><span class="s">§</span><span data-i18n="nav5">Публикации</span></div>
+      <h1 class="d1" style="font-size:clamp(36px,4.4vw,64px)" data-i18n="n_t">Мысли — <em>в печать</em></h1>
+      <p class="lede" style="margin-top:30px" data-i18n="n_l">Нечасто, технично, полезно. Мы пишем, когда есть что сказать.</p>
+    </div>
+  </section>
+  <section class="sec ins" style="border:none">
+    <div class="wrap">
+      <div class="row"><span class="dt" data-i18n="n1d">Июнь 2026</span><h3 data-i18n="n1t">Налоговый кодекс — 2026 и структуры профессиональных услуг: что меняется на самом деле</h3><span class="ct" data-i18n="n1c">Регуляторика</span></div>
+      <div class="row"><span class="dt" data-i18n="n2d">Май 2026</span><h3 data-i18n="n2t">SPA по английскому праву в сделках МФЦА: пять положений, где рыночная практика незаметно сдвинулась</h3><span class="ct">M&amp;A</span></div>
+      <div class="row"><span class="dt" data-i18n="n3d">Апрель 2026</span><h3 data-i18n="n3t">Трансграничные сервисные структуры по налоговым соглашениям KZ–NL и KZ–SG</h3><span class="ct" data-i18n="n3c">Трансграничные сделки</span></div>
+      <div class="row"><span class="dt" data-i18n="n4d">Март 2026</span><h3 data-i18n="n4t">Отлагательные условия, которые действительно закрываются: последовательность регуляторных согласований</h3><span class="ct" data-i18n="n4c">Сделки</span></div>
+      <div class="row"><span class="dt" data-i18n="n5d">Февраль 2026</span><h3 data-i18n="n5t">Суд МФЦА против LCIA: выбор форума для акционерных споров</h3><span class="ct" data-i18n="n5c">Арбитраж</span></div>
+      <div class="row"><span class="dt" data-i18n="n6d">Январь 2026</span><h3 data-i18n="n6t">Прозрачность бенефициаров и антимонопольный контроль: новый базовый уровень due diligence</h3><span class="ct" data-i18n="n6c">Управление</span></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ КОНТАКТЫ ============ -->
+<div class="page" id="p-contact">
+  <section class="ph"><span class="gs">§</span>
+    <div class="wrap">
+      <div class="eb"><span class="s">§</span><span data-i18n="nav6">Контакты</span></div>
+      <h1 class="d1" style="font-size:clamp(36px,4.4vw,64px)" data-i18n="c_t">Начнём <em>разговор</em></h1>
+    </div>
+  </section>
+  <section class="sec" style="border:none">
+    <div class="wrap cgrid">
+      <div>
+        <p class="lede" data-i18n="c_l">Каждое обращение конфиденциально с первого контакта. Старший юрист отвечает в течение одного рабочего дня.</p>
+        <div class="clines">
+          <div class="cl"><span class="k" data-i18n="c1k">Астана</span><span data-i18n="c1v">МФЦА, Мангилик Ел 55/17<br>Астана, Казахстан</span></div>
+          <div class="cl"><span class="k" data-i18n="c2k">Алматы</span><span data-i18n="c2v">проспект Аль-Фараби<br>Алматы, Казахстан</span></div>
+          <div class="cl"><span class="k">Email</span><a href="mailto:counsel@specter.kz">counsel@specter.kz</a></div>
+          <div class="cl"><span class="k" data-i18n="c4k">Телефон</span><a href="tel:+77170000000">+7 (717) 000 00 00</a></div>
+        </div>
+      </div>
+      <div class="cform">
+        <h3 data-i18n="cf_t">Записаться на консультацию</h3>
+        <div class="ff"><label for="fn" data-i18n="cf1">Имя и фамилия</label><input id="fn" type="text" autocomplete="name"></div>
+        <div class="ff"><label for="fc" data-i18n="cf2">Компания</label><input id="fc" type="text" autocomplete="organization"></div>
+        <div class="ff"><label for="fe">Email</label><input id="fe" type="email" autocomplete="email"></div>
+        <div class="ff"><label for="fm" data-i18n="cf3">Суть вопроса</label><textarea id="fm" rows="4"></textarea></div>
+        <button class="btn btn-solid" style="width:100%" data-i18n="cf_b">Отправить запрос</button>
+        <p class="cnote" data-i18n="cf_n">Отправка формы не создаёт отношений «юрист — клиент». Пожалуйста, не включайте конфиденциальную информацию на этом этапе.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <span class="wordmark" style="font-size:16px">Specter<span class="k">.</span></span>
+        <p class="fdesc" data-i18n="ft_d">Бутик корпоративного и транзакционного сопровождения. Казахстан · МФЦА · трансграничные сделки.</p>
+      </div>
+      <div><h4 data-i18n="ft1">Фирма</h4><a href="#" onclick="go('firm');return false" data-i18n="nav4">Фирма</a><a href="#" onclick="go('insights');return false" data-i18n="nav5">Публикации</a><a href="#" onclick="go('contact');return false" data-i18n="nav6">Контакты</a></div>
+      <div><h4 data-i18n="ft2">Практика</h4><a href="#" onclick="go('expertise');return false">M&amp;A</a><a href="#" onclick="go('expertise');return false" data-i18n="ft2b">Частный капитал</a><a href="#" onclick="go('expertise');return false" data-i18n="ft2c">МФЦА и регуляторика</a></div>
+      <div><h4 data-i18n="ft3">Правовая информация</h4><a href="#" data-i18n="ft3a">Условия оказания услуг</a><a href="#" data-i18n="ft3b">Политика конфиденциальности</a></div>
+    </div>
+    <div class="fbot">
+      <span data-i18n="ft_c">© 2026 Specter. Все права защищены.</span>
+      <span class="fgroup">Part of Specter Group</span>
+      <span>specter.kz</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- tabs ---------- */
+function go(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('on'));
+  document.getElementById('p-'+p).classList.add('on');
+  document.querySelectorAll('.nav-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ---------- i18n ----------
+   Русский — базовый язык: тексты берутся из разметки при загрузке.
+   Английские строки — в словаре EN ниже. */
+var RU = {};   // заполняется автоматически из HTML
+var EN = {
+  nav1:"Home", nav2:"Expertise", nav3:"Transactions", nav4:"Firm", nav5:"Insights", nav6:"Contact",
+  cta:"Schedule a consultation",
+  h_eb:"Corporate &amp; Transaction Counsel — Kazakhstan · AIFC · Cross-Border",
+  h_t:"Complex transactions.<br><em>Simple solutions.</em>",
+  h_l:"Specter advises investors, financial institutions and corporate groups on M&amp;A, private capital and cross-border transactions in Kazakhstan, the AIFC and beyond.",
+  h_b2:"Our expertise",
+  m1:"Aggregate deal value", m2:"Closed matters", m3:"Jurisdictions", m4:"Partner-led matters",
+  q_t:"The rigour of an international firm. <b>The focus of a boutique.</b>",
+  q_a:"The firm's principle",
+  p_eb:"Practice", p_t:"The full corporate <em>spectrum</em>",
+  p_l:"One integrated team across every discipline a complex transaction touches. No hand-offs between departments — because there are no departments.",
+  p1t:"Mergers &amp; Acquisitions", p1d:"Buy-side and sell-side mandates, auctions, carve-outs and joint ventures under Kazakh, AIFC and English law.",
+  p2t:"Private Equity", p2d:"Acquisition structures, equity documentation, management incentives and structured exits for sponsors.",
+  p3t:"Venture Capital", p3d:"Seed through growth rounds, cap table architecture and cross-border holding structures.",
+  p4t:"Banking &amp; Finance", p4d:"Syndicated and acquisition finance, security packages, intercreditor terms and restructurings.",
+  p5t:"Capital Markets", p5d:"Equity and debt offerings, AIX and international listings, issuer compliance.",
+  p6t:"AIFC &amp; Regulatory", p6d:"AFSA authorisation, regulated structures, fintech regimes and the interface with acting Kazakh law.",
+  p7t:"Cross-Border Transactions", p7d:"Multi-law deal architecture across Central Asia, the Gulf, Europe and Singapore.",
+  p8t:"Corporate Governance", p8d:"Shareholder architecture, board advisory, group restructurings and antimonopoly control.",
+  p9t:"Dispute Strategy &amp; Arbitration", p9d:"Commercial and investment arbitration with an enforcement-first mindset.",
+  tx_eb:"Selected Work", tx_t:"Selected <em>transactions</em>",
+  t1g:"M&amp;A · Energy", bn:"bn", mn:"m", jur:"jur.",
+  t1d:"Buy-side counsel on the acquisition of a controlling stake in an integrated energy group — four regulatory regimes, parallel English-law SPA/SHA architecture, antimonopoly clearance.",
+  t1f:"Cross-border · KZ / UK / NL · Closed",
+  t2g:"Private Equity", t2d:"Sponsor-side counsel on a leveraged buyout with management rollover and vendor financing.", t2f:"LBO · Consumer sector",
+  t3g:"Banking &amp; Finance", t3d:"Lender counsel on senior secured syndicated financing for an infrastructure platform.", t3f:"Syndicated · 6 lenders",
+  t4g:"Venture Capital", t4d:"Series B investment into a regional fintech via an AIFC holding structure.", t4f:"Investor counsel · AIFC",
+  t5g:"Cross-Border", t5d:"Reorganisation of an industrial group across Kazakhstan, the UAE and Singapore with treaty-aligned service flows.", t5f:"Group restructuring",
+  t6g:"Capital Markets", t6d:"Issuer counsel on an initial public offering and dual-listing readiness programme.", t6f:"Equity · Listing",
+  tx_c:"§ — The majority of our mandates remain confidential at clients' request.",
+  w_eb:"Why Specter", w_t:"How we <em>work</em>",
+  w1t:"Partner-led, start to close", w1d:"Every matter is run by a senior lawyer from mandate to closing. No leverage pyramids, no hand-offs.",
+  w2t:"Deal architecture, not memos", w2d:"We design the transaction — structure, sequence, leverage points — rather than annotate someone else's plan.",
+  w3t:"Two legal systems, one team", w3d:"Native command of Kazakh civil law and English-law deal technology under the AIFC framework.",
+  w4t:"Discretion as default", w4d:"Confidentiality is a baseline condition of our work, not an option. Mandate details are disclosed only with client consent.",
+  i_eb:"Industries", i_t:"Where we <em>operate</em>",
+  i1t:"Energy &amp; Natural Resources", i1d:"Upstream to power — acquisitions, JVs and regulatory approvals.",
+  i2t:"Financial Institutions &amp; Fintech", i2d:"Banks, funds, payment platforms and regulated AIFC entities.",
+  i3t:"Industrials, Infrastructure &amp; Transport", i3d:"Platforms, concessions and cross-border logistics groups.",
+  i4t:"Private Capital &amp; Family Offices", i4d:"Holding architecture, succession and co-investment structures.",
+  e_eb:"Engage", e_t:"Let's discuss your <em>next transaction</em>", e_l:"Initial consultations are confidential and without obligation.",
+  x_t:"Nine disciplines.<br><em>One deal team.</em>",
+  x_l:"We field a single integrated team calibrated to the transaction — not departments competing for a mandate.",
+  x1d:"Full lifecycle representation: term sheets, due diligence and red-flag reporting, SPA/SHA negotiation under Kazakh and English law, conditions precedent management, disclosure, closing mechanics and post-closing integration. Auctions on both sides of the table.",
+  x2d:"Sponsor and management-side counsel across the cycle — acquisition structures, equity documentation, ratchets and incentive plans, portfolio governance and exit readiness.",
+  x3d:"Seed through late-stage rounds, investor rights, ESOP design and holding structures via the AIFC, ADGM and Singapore.",
+  x4d:"Bilateral and syndicated facilities, security over shares and assets, intercreditor arrangements and workout situations.",
+  x5d:"IPOs and secondary offerings, bond programmes, AIX and international listings, prospectus liability and continuing obligations.",
+  x6d:"AFSA authorisation and supervision, structuring of funds and regulated firms, fintech regimes and the interface with acting Kazakh law.",
+  x7d:"Multi-law transaction design, treaty alignment, correct party identification across jurisdictions, bilingual documentation to closing standard.",
+  x8d:"Charter and shareholder architecture, board effectiveness, UBO transparency, related-party frameworks and antimonopoly control.",
+  x9d:"Commercial and investment arbitration before the AIFC Court, LCIA, ICC and SIAC, with parallel enforcement strategy.",
+  x10t:"Compliance", x10d:"AML/CFT frameworks, sanctions exposure reviews, internal investigations and transaction-level compliance opinions.",
+  tr_eb:"Track Record", tr_t:"Selected <em>transactions</em>",
+  tr_l:"A representative sample of closed matters.",
+  r1d:"Controlling-stake acquisition of an integrated energy group across four regulatory regimes.", r1f:"Buy-side · Closed",
+  r2d:"Senior secured syndicated financing for an infrastructure platform.", r2f:"Lender counsel",
+  r3g:"M&amp;A · Mining", r3d:"Sell-side auction with staged completion and earn-out mechanics.", r3f:"Sell-side · Auction",
+  r4d:"Leveraged buyout with management rollover and vendor financing.", r4f:"Sponsor counsel",
+  r5g:"Restructuring", r5d:"Debt restructuring and recapitalisation of a regional group.", r5f:"Creditor committee",
+  r6g:"Sovereign", r6d:"PPP concession and financing for a national transport corridor.", r6f:"Grantor-side",
+  r7d:"Series B into a regional fintech via an AIFC holding.", r7f:"Investor counsel",
+  r8d:"Issuer counsel on an IPO and dual-listing readiness programme.", r8f:"Issuer counsel",
+  r9g:"Arbitration", r9d:"Defence of a commercial claim with full costs recovery.", r9f:"Respondent counsel",
+  tr_c:"§ — Values and sectors are indicative; details are disclosed only with client consent.",
+  f_eb:"The Firm", f_t:"Senior by <em>design</em>",
+  f_l:"A deliberately compact team. Every lawyer at Specter has led — not supported — complex transactions.",
+  f1r:"Managing Partner", f1s:"M&amp;A · Corporate",
+  f1d:"Leads the transaction practice. Coordinates multi-workstream deals from term sheet to closing under Kazakh and English law.",
+  f1a:"Cross-border M&amp;A across KZ, AIFC, UAE, Singapore, NL", f1b:"Auction experience on both sides of the table",
+  f2r:"Senior Partner", f2s:"M&amp;A · Restructuring",
+  f2d:"Counsel on high-stakes acquisitions and group restructurings, combining civil-law depth with English-law deal technology.",
+  f2a:"Energy, finance and industrial sector mandates", f2b:"Shareholder architecture and antimonopoly clearances",
+  f3r:"Partner", f3s:"Private Capital",
+  f3d:"Counsel to sponsors and growth funds on fund structures, investments and exits across the region.",
+  f3a:"PE/VC transactions from seed to buyout", f3b:"AIFC fund platforms for institutional sponsors",
+  f4s:"AIFC · Regulatory",
+  f4d:"Deep working knowledge of AFSA practice, regulated structures and the AIFC institutional ecosystem.",
+  f4a:"Authorisations and regulated structurings at scale", f4b:"Digital-asset and fintech regimes",
+  f5r:"Counsel", f5s:"Disputes &amp; Arbitration",
+  f5d:"Advocate in commercial and investment disputes with an enforcement-first approach to strategy.",
+  f5a:"LCIA, ICC, SIAC and AIFC Court experience", f5b:"Parallel enforcement and asset-tracing strategy",
+  f6s:"Cross-Border Structuring",
+  f6d:"Designs multi-jurisdictional holding and service structures with full treaty alignment.",
+  f6a:"Structures spanning 11 jurisdictions", f6b:"Bilingual documentation to closing standard",
+  n_t:"Thinking, <em>published</em>", n_l:"Occasional, technical, useful. We write when we have something to say.",
+  n1d:"Jun 2026", n1t:"The 2026 Tax Code and professional-services structures: what actually changes", n1c:"Regulatory",
+  n2d:"May 2026", n2t:"English-law SPAs in AIFC deals: five clauses where market practice has quietly shifted",
+  n3d:"Apr 2026", n3t:"Cross-border service arrangements under the KZ–NL and KZ–SG tax treaties", n3c:"Cross-Border",
+  n4d:"Mar 2026", n4t:"Conditions precedent that actually close: sequencing regulatory approvals", n4c:"Transactions",
+  n5d:"Feb 2026", n5t:"AIFC Court vs. LCIA: choosing the forum for shareholder disputes", n5c:"Arbitration",
+  n6d:"Jan 2026", n6t:"UBO transparency and antimonopoly control: the new diligence baseline", n6c:"Governance",
+  c_t:"Begin the <em>conversation</em>",
+  c_l:"Every enquiry is confidential from first contact. A senior lawyer responds within one business day.",
+  c1k:"Astana", c1v:"AIFC, Mangilik El 55/17<br>Astana, Kazakhstan",
+  c2k:"Almaty", c2v:"Al-Farabi Avenue<br>Almaty, Kazakhstan", c4k:"Telephone",
+  cf_t:"Schedule a consultation", cf1:"Full name", cf2:"Company", cf3:"Matter summary", cf_b:"Request consultation",
+  cf_n:"Submitting this form does not create an attorney–client relationship. Please do not include confidential information at this stage.",
+  ft_d:"A corporate and transaction counsel boutique. Kazakhstan · AIFC · cross-border.",
+  ft1:"Firm", ft2:"Practice", ft2b:"Private Capital", ft2c:"AIFC &amp; Regulatory",
+  ft3:"Legal", ft3a:"Terms of engagement", ft3b:"Privacy notice",
+  ft_c:"© 2026 Specter. All rights reserved."
+};
+
+var TITLES = {
+  ru:"Specter — корпоративное и транзакционное сопровождение",
+  en:"Specter — Corporate & Transaction Counsel"
+};
+
+/* собрать русские строки из разметки один раз при загрузке */
+document.querySelectorAll('[data-i18n]').forEach(function(el){
+  var k = el.getAttribute('data-i18n');
+  if(!(k in RU)) RU[k] = el.innerHTML;
+});
+
+function setLang(l){
+  var dict = l === 'en' ? EN : RU;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.documentElement.lang = l;
+  document.title = TITLES[l];
+  document.getElementById('lb-ru').classList.toggle('on', l==='ru');
+  document.getElementById('lb-en').classList.toggle('on', l==='en');
+  try{ localStorage.setItem('specter-lang', l); }catch(e){}
+}
+
+/* восстановить выбор языка, если браузер позволяет */
+try{
+  var saved = localStorage.getItem('specter-lang');
+  if(saved === 'en') setLang('en');
+}catch(e){}
+</script>
+</body>
+</html>
