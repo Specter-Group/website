@@ -150,6 +150,9 @@ h1,h2,h3{font-family:var(--display);font-weight:200;letter-spacing:-.02em}
 .ff input,.ff textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-strong);color:var(--mist);font-family:var(--body);font-size:15px;padding:9px 0;outline:none;resize:none;transition:border-color .3s}
 .ff input:focus,.ff textarea:focus{border-color:#C6CBD4}
 .cnote{font-size:11.5px;color:var(--faint);margin-top:16px;line-height:1.6}
+.form-status{font-size:14px;line-height:1.6;padding:16px 18px;margin-bottom:24px;border:1px solid var(--line-strong);color:var(--mist)}
+.cform button:disabled{opacity:.6;cursor:wait}
+.form-honey{display:none}
 
 footer{border-top:1px solid var(--line);padding:72px 0 44px;margin-top:30px;position:relative}
 footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--spectral);opacity:.4}
@@ -172,6 +175,9 @@ footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;b
 }
 @media(max-width:680px){
   .wrap{padding:0 22px}
+  .cl{grid-template-columns:1fr;gap:8px}
+  .cl a{overflow-wrap:anywhere}
+  .cform{padding:32px 24px}
   .pgrid,.pgrid.two,.txg,.firm-grid{grid-template-columns:1fr}
   .tx.wide{grid-column:span 1}
   .ins .row{grid-template-columns:1fr;gap:8px}
@@ -433,20 +439,27 @@ footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;b
       <div>
         <p class="lede" data-i18n="c_l">Каждое обращение конфиденциально с первого контакта. Мы отвечаем в течение одного рабочего дня.</p>
         <div class="clines">
-          <div class="cl"><span class="k" data-i18n="c1k">Астана</span><span data-i18n="c1v">МФЦА, Mangilik El 55/17, Talan Towers<br>Астана, Казахстан</span></div>
-          <div class="cl"><span class="k">Email</span><a href="mailto:counsel@specter.kz">counsel@specter.kz</a></div>
-          <div class="cl"><span class="k" data-i18n="c4k">Телефон</span><a href="tel:+77173550607">+7 717 355 06 07</a></div>
+          <div class="cl"><span class="k" data-i18n="c1k">Астана</span><span data-i18n="c1v">г. Астана, район Есиль<br>ул. Достык, дом 5/2, ВП-3</span></div>
+          <div class="cl"><span class="k">Email</span><a href="mailto:business@specter.kz">business@specter.kz</a></div>
+          <div class="cl"><span class="k" data-i18n="c4k">Телефон</span><a href="tel:+77767617733">+7 776 761 77 33</a></div>
         </div>
       </div>
-      <div class="cform">
+      <form class="cform" id="contact-form" action="https://formsubmit.co/business@specter.kz" method="POST" accept-charset="UTF-8">
         <h3 data-i18n="cf_t">Отправить запрос</h3>
-        <div class="ff"><label for="fn" data-i18n="cf1">Имя и фамилия</label><input id="fn" type="text" autocomplete="name"></div>
-        <div class="ff"><label for="fc" data-i18n="cf2">Компания</label><input id="fc" type="text" autocomplete="organization"></div>
-        <div class="ff"><label for="fe">Email</label><input id="fe" type="email" autocomplete="email"></div>
-        <div class="ff"><label for="fm" data-i18n="cf3">Суть вопроса</label><textarea id="fm" rows="4"></textarea></div>
-        <button class="btn btn-solid" style="width:100%" data-i18n="cf_b">Отправить запрос</button>
+        <p class="form-status" id="contact-success" role="status" data-i18n="cf_ok" hidden>Запрос отправлен. Спасибо за обращение. Мы ответим в течение одного рабочего дня.</p>
+        <input type="hidden" name="_subject" value="Новый запрос с сайта Specter">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="contact-next" value="https://specter.kz/?request=sent&amp;lang=ru">
+        <input type="hidden" name="_url" value="https://specter.kz/">
+        <input type="hidden" name="language" id="contact-language" value="ru">
+        <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="ff"><label for="fn" data-i18n="cf1">Имя и фамилия</label><input id="fn" name="name" type="text" autocomplete="name" maxlength="120" required></div>
+        <div class="ff"><label for="fc" data-i18n="cf2">Компания</label><input id="fc" name="company" type="text" autocomplete="organization" maxlength="200"></div>
+        <div class="ff"><label for="fe">Email</label><input id="fe" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+        <div class="ff"><label for="fm" data-i18n="cf3">Суть вопроса</label><textarea id="fm" name="message" rows="4" maxlength="10000" required></textarea></div>
+        <button type="submit" class="btn btn-solid" style="width:100%" data-i18n="cf_b">Отправить запрос</button>
         <p class="cnote" data-i18n="cf_n">Отправка формы не создаёт отношений «юрист — клиент». Пожалуйста, не включайте конфиденциальную информацию на этом этапе.</p>
-      </div>
+      </form>
     </div>
   </section>
 </div>
@@ -578,9 +591,11 @@ var EN = {
   n6d:"Jan 2026", n6t:"UBO transparency and antimonopoly control: the new diligence baseline", n6c:"Governance",
   c_t:"Our <em>address</em>",
   c_l:"Every enquiry is confidential from first contact. We respond within one business day.",
-  c1k:"Astana", c1v:"AIFC, Mangilik El 55/17, Talan Towers<br>Astana, Kazakhstan",
+  c1k:"Astana", c1v:"Premises VP-3, 5/2 Dostyk Street<br>Yesil District, Astana, Kazakhstan",
   c4k:"Telephone",
-  cf_t:"Send a request", cf1:"Full name", cf2:"Company", cf3:"Matter summary", cf_b:"Send request",
+  cf_t:"Send a request", cf1:"Full name", cf2:"Company", cf3:"Matter summary", cf_b:"Send request", cf_sending:"Sending…",
+  cf_required:"Please complete this field.",
+  cf_ok:"Your request has been submitted. Thank you for contacting us. We will respond within one business day.",
   cf_n:"Submitting this form does not create an attorney–client relationship. Please do not include confidential information at this stage.",
   ft_d:"A corporate and transaction counsel boutique. Kazakhstan · AIFC · cross-border.",
   ft1:"Firm", ft2:"Practice", ft2b:"Private Capital", ft2c:"AIFC &amp; Regulatory",
@@ -599,6 +614,9 @@ document.querySelectorAll('[data-i18n]').forEach(function(el){
   if(!(k in RU)) RU[k] = el.innerHTML;
 });
 
+RU.cf_sending = 'Отправка…';
+RU.cf_required = 'Пожалуйста, заполните это поле.';
+
 function setLang(l){
   var dict = l === 'en' ? EN : RU;
   document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -607,16 +625,63 @@ function setLang(l){
   });
   document.documentElement.lang = l;
   document.title = TITLES[l];
+  document.getElementById('contact-language').value = l;
+  document.getElementById('contact-next').value = 'https://specter.kz/?request=sent&lang=' + l;
+  document.querySelectorAll('#contact-form [required]').forEach(function(field){
+    field.setCustomValidity('');
+  });
   document.getElementById('lb-ru').classList.toggle('on', l==='ru');
   document.getElementById('lb-en').classList.toggle('on', l==='en');
   try{ localStorage.setItem('specter-lang', l); }catch(e){}
 }
 
-/* восстановить выбор языка, если браузер позволяет */
-try{
-  var saved = localStorage.getItem('specter-lang');
-  if(saved === 'en') setLang('en');
-}catch(e){}
+/* Язык после отправки формы имеет приоритет перед сохранённым выбором. */
+var contactParams = new URLSearchParams(window.location.search);
+var returnLanguage = contactParams.get('lang');
+if(returnLanguage === 'en' || returnLanguage === 'ru'){
+  setLang(returnLanguage);
+}else{
+  try{
+    var saved = localStorage.getItem('specter-lang');
+    if(saved === 'en') setLang('en');
+  }catch(e){}
+}
+
+/* Обычный POST сохраняет проверку reCAPTCHA на стороне FormSubmit. */
+var contactForm = document.getElementById('contact-form');
+var contactButton = contactForm.querySelector('button[type="submit"]');
+contactForm.querySelectorAll('[required]').forEach(function(field){
+  field.addEventListener('input', function(){ field.setCustomValidity(''); });
+});
+contactForm.addEventListener('submit', function(event){
+  var dict = document.documentElement.lang === 'en' ? EN : RU;
+  contactForm.querySelectorAll('[required]').forEach(function(field){
+    field.value = field.value.trim();
+    field.setCustomValidity(field.value ? '' : dict.cf_required);
+  });
+  if(!contactForm.reportValidity()){
+    event.preventDefault();
+    return;
+  }
+  contactButton.disabled = true;
+  contactButton.setAttribute('data-i18n', 'cf_sending');
+  contactButton.textContent = dict.cf_sending;
+});
+window.addEventListener('pageshow', function(){
+  contactButton.disabled = false;
+  contactButton.setAttribute('data-i18n', 'cf_b');
+  contactButton.textContent = (document.documentElement.lang === 'en' ? EN : RU).cf_b;
+});
+if(contactParams.get('request') === 'sent'){
+  go('contact');
+  document.getElementById('contact-success').hidden = false;
+  contactParams.delete('request');
+  contactParams.delete('lang');
+  var remainingQuery = contactParams.toString();
+  try{
+    history.replaceState(null, '', window.location.pathname + (remainingQuery ? '?' + remainingQuery : '') + window.location.hash);
+  }catch(e){}
+}
 </script>
 </body>
 </html>
